@@ -1,11 +1,11 @@
-# Bresenham Line Rasterizer
+# Shape Rasterizer
+Using this console program, you define arbitrary lines and polygons and get the pixel coordinates of the rasterized sahpe.
 
-Using this console program, you insert the start and the end point of an arbitrary line and get the pixel coordinates of the rasterized line.
-The underlying logic is based on Bresenham's line rasterizaton algorithm.
-
+# Underlying Algorithms
+Line rasterization: Bresenham's line rasterization algorithm.
+Polygon rasterization: Pineda's polygon rasterization algorithm.
 
 # How To Run The Program
-
 Prerequisite: Visual Studio 2015 or newer installed.
 
 To run the program, follow these steps:
@@ -15,6 +15,5 @@ To run the program, follow these steps:
 
 
 # Disclaimer
-
 This program serves solely as a personal practice.
 
