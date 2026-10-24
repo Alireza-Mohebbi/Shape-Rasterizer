@@ -6,7 +6,7 @@ public static class Program
 {
     public static void Main()
     {
-        Console.WriteLine("Choose a primitive to rasterize:");
+        Console.WriteLine("Choose a shape to rasterize:");
         Console.WriteLine("1-Line");
         Console.WriteLine("2-Triangle");
 
@@ -68,30 +68,18 @@ public static class Program
         Console.Write("Y2: ");
         int y3 = int.Parse(Console.ReadLine());
 
-        List<PointF> myTriangle = TriangleRasterizer.GetRasterizedTriangle(new PointF(x1, y1), new PointF(x2, y2), new PointF(x3, y3));
+        List<Point> myTriangle = TriangleRasterizer.GetRasterizedTriangle(new PointF(x1, y1), new PointF(x2, y2), new PointF(x3, y3));
 
         PrintResult(myTriangle);
     }
 
     /// Result printing ///
-    public static void PrintResult(List<Point> rasterizedTriangle)
+    public static void PrintResult(List<Point> rasterizedShape)
     {
-        if (rasterizedTriangle.Count != 0)
+        if (rasterizedShape.Count != 0)
         {
-            Console.WriteLine("\nPixel coordinates of the rasterized triangle:");
-            foreach (Point pixel in rasterizedTriangle)
-            {
-                Console.WriteLine("({0}, {1})", pixel.X, pixel.Y);
-            }
-        }
-    }
-
-    public static void PrintResult(List<PointF> rasterizedLine)
-    {
-        if (rasterizedLine.Count != 0)
-        {
-            Console.WriteLine("\nPixel coordinates of the rasterized line:");
-            foreach (PointF pixel in rasterizedLine)
+            Console.WriteLine("\nPixel coordinates of the rasterized shape:");
+            foreach (Point pixel in rasterizedShape)
             {
                 Console.WriteLine("({0}, {1})", pixel.X, pixel.Y);
             }

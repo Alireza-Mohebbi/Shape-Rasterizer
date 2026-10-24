@@ -5,11 +5,11 @@ using System.Drawing;
 // This method uses Pineda's rasterization algorithm
 public static class TriangleRasterizer
 {
-    public static List<PointF> GetRasterizedTriangle(PointF Point1, PointF Point2, PointF Point3)
+    public static List<Point> GetRasterizedTriangle(PointF Point1, PointF Point2, PointF Point3)
     {
         BoundingBox triangleBoundingBox = new BoundingBox(Point1, Point2, Point3);
         List<PointF> PointsInClockwiseOrder = SortPointsInClockwiseOrder(Point1, Point2, Point3);
-        List<PointF> trianglePixels = new List<PointF>();
+        List<Point> trianglePixels = new List<Point>();
         List<float> rowEdgeFunctions = InitializeEdgeFunctionsPerEdge(PointsInClockwiseOrder, triangleBoundingBox);
 
         for (int y = triangleBoundingBox.top; y >= triangleBoundingBox.bottom; y--)
@@ -19,7 +19,7 @@ public static class TriangleRasterizer
             {
                 if (IsPixelInsideTriangle(edgeFunctions))
                 {
-                    trianglePixels.Add(new PointF(x, y));
+                    trianglePixels.Add(new Point(x, y));
                 }
                 UpdateEdgeFunctionsRow(edgeFunctions, PointsInClockwiseOrder);
             }
