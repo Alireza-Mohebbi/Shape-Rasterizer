@@ -4,17 +4,17 @@ using System.Drawing;
 using System.Linq;
 
 // This method uses Bresenham's rasterization algorithm
-public class LineRasterizer
+public static class LineRasterizer
 {
-    private Point startPoint;
-    private Point endPoint;
-    private int lineWidth;
-    private int lineHeight;
-    private float lineSlope;
-    private int nextPixel_Y_Decider;
-    private List<Point> linePixels = new List<Point>();
+    private static Point startPoint;
+    private static Point endPoint;
+    private static int lineWidth;
+    private static int lineHeight;
+    private static float lineSlope;
+    private static int nextPixel_Y_Decider;
+    private static List<Point> linePixels = new List<Point>();
 
-    public List<Point> GetRasterizedLine(Point startPoint, Point endPoint)
+    public static List<Point> GetRasterizedLine(Point startPoint, Point endPoint)
     {
         linePixels.Clear();
         InitializeVariables(startPoint, endPoint);
@@ -27,17 +27,17 @@ public class LineRasterizer
         return linePixels;
     }
 
-    private void InitializeVariables(Point startPoint, Point endPoint)
+    private static void InitializeVariables(Point startPoint, Point endPoint)
     {
-        this.startPoint = startPoint;
-        this.endPoint = endPoint;
+        LineRasterizer.startPoint = startPoint;
+        LineRasterizer.endPoint = endPoint;
         lineWidth = endPoint.X - startPoint.X;
         lineHeight = endPoint.Y - startPoint.Y;
         lineSlope = lineWidth == 0 ? 0 : (float)lineHeight / lineWidth;
         nextPixel_Y_Decider = 0;
     }
 
-    private bool IsLineValid()
+    private static bool IsLineValid()
     {
         if (startPoint.X <= endPoint.X)
         {
@@ -64,7 +64,7 @@ public class LineRasterizer
         return false;
     }
 
-    private void PrepareLine()
+    private static void PrepareLine()
     {
         if (lineSlope < 0)
         {
@@ -80,18 +80,18 @@ public class LineRasterizer
         lineHeight = endPoint.Y - startPoint.Y;
     }
 
-    private void InvertLineSlopeToPositive()
+    private static void InvertLineSlopeToPositive()
     {
         endPoint = new Point(endPoint.X, endPoint.Y + 2 * Math.Abs(lineHeight));
     }
 
-    private void SwapLine_X_And_Y_Coordinates()
+    private static void SwapLine_X_And_Y_Coordinates()
     {
         startPoint = new Point(startPoint.Y, startPoint.X);
         endPoint = new Point(endPoint.Y, endPoint.X);
     }
 
-    private void RasterizeLine()
+    private static void RasterizeLine()
     {
         int x = startPoint.X;
         int y = startPoint.Y;
@@ -105,17 +105,17 @@ public class LineRasterizer
         }
     }
 
-    private void AddPixel(int x, int y)
+    private static void AddPixel(int x, int y)
     {
         linePixels.Add(new Point(x, y));
     }
 
-    private int PrepareNextPixel_X(int x)
+    private static int PrepareNextPixel_X(int x)
     {
         return ++x;
     }
 
-    private int PrepareNextPixel_Y(int y)
+    private static int PrepareNextPixel_Y(int y)
     {
         if (ShouldPixelSiftUp())
         {
@@ -129,12 +129,12 @@ public class LineRasterizer
         return y;
     }
 
-    private bool ShouldPixelSiftUp()
+    private static bool ShouldPixelSiftUp()
     {
         return 2 * lineHeight - lineWidth + nextPixel_Y_Decider > 0;
     }
 
-    private void OrganizeResult()
+    private static void OrganizeResult()
     {
         if (Math.Abs(lineSlope) > 1)
         {
@@ -146,7 +146,7 @@ public class LineRasterizer
         }
     }
 
-    private void SwapLinePixels_X_And_Y_Coordinates()
+    private static void SwapLinePixels_X_And_Y_Coordinates()
     {
         for (int i = 0; i < linePixels.Count(); i++)
         {
@@ -155,7 +155,7 @@ public class LineRasterizer
         }
     }
 
-    private void InvertSlopeOfRasterizedLineToNegative()
+    private static void InvertSlopeOfRasterizedLineToNegative()
     {
         for (int i = 0; i < linePixels.Count(); i++)
         {

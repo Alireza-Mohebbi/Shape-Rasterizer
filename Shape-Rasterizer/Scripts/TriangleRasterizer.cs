@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 
 // This method uses Pineda's rasterization algorithm
-public class TriangleRasterizer
+public static class TriangleRasterizer
 {
-    public List<PointF> GetRasterizedTriangle(PointF Point1, PointF Point2, PointF Point3)
+    public static List<PointF> GetRasterizedTriangle(PointF Point1, PointF Point2, PointF Point3)
     {
         BoundingBox triangleBoundingBox = new BoundingBox(Point1, Point2, Point3);
         List<PointF> PointsInClockwiseOrder = SortPointsInClockwiseOrder(Point1, Point2, Point3);
@@ -28,7 +28,7 @@ public class TriangleRasterizer
         return trianglePixels;
     }
 
-    private List<PointF> SortPointsInClockwiseOrder(PointF Point1, PointF Point2, PointF Point3)
+    private static List<PointF> SortPointsInClockwiseOrder(PointF Point1, PointF Point2, PointF Point3)
     {
         List<PointF> Points = new List<PointF> { Point1, Point2, Point3 };
         float centerOfTriangleX = ((Point1.X + Point2.X + Point3.X) / 3f);
@@ -40,7 +40,7 @@ public class TriangleRasterizer
         return Points;
     }
 
-    private List<float> InitializeEdgeFunctionsPerEdge(List<PointF> PointsInClockwiseOrder, BoundingBox triangleBoundingBox)
+    private static List<float> InitializeEdgeFunctionsPerEdge(List<PointF> PointsInClockwiseOrder, BoundingBox triangleBoundingBox)
     {
         float px = triangleBoundingBox.left + 0.5f;
         float py = triangleBoundingBox.top + 0.5f;
@@ -55,12 +55,12 @@ public class TriangleRasterizer
         return edgeFunctions;
     }
 
-    private bool IsPixelInsideTriangle(List<float> edgeFunctions)
+    private static bool IsPixelInsideTriangle(List<float> edgeFunctions)
     {
         return edgeFunctions[0] >= 0 && edgeFunctions[1] >= 0 && edgeFunctions[2] >= 0;
     }
 
-    private void UpdateEdgeFunctionsRow(List<float> edgeFunctions, List<PointF> PointsInClockwiseOrder)
+    private static void UpdateEdgeFunctionsRow(List<float> edgeFunctions, List<PointF> PointsInClockwiseOrder)
     {
         for (int i = 0; i < 3; i++)
         {
@@ -68,7 +68,7 @@ public class TriangleRasterizer
         }
     }
 
-    private void UpdateEdgeFunctionsColumn(List<float> rowEdgeFunctions, List<PointF> PointsInClockwiseOrder)
+    private static void UpdateEdgeFunctionsColumn(List<float> rowEdgeFunctions, List<PointF> PointsInClockwiseOrder)
     {
         for (int i = 0; i < 3; i++)
         {

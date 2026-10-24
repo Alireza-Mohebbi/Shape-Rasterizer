@@ -43,8 +43,7 @@ public static class Program
         Console.Write("Y2: ");
         int y2 = int.Parse(Console.ReadLine());
 
-        LineRasterizer lineRasterizer = new LineRasterizer();
-        List<Point> myLine = lineRasterizer.GetRasterizedLine(new Point(x1, y1), new Point(x2, y2));
+        List<Point> myLine = LineRasterizer.GetRasterizedLine(new Point(x1, y1), new Point(x2, y2));
 
         PrintResult(myLine);
     }
@@ -69,8 +68,7 @@ public static class Program
         Console.Write("Y2: ");
         int y3 = int.Parse(Console.ReadLine());
 
-        TriangleRasterizer triagnleRasterizer = new TriangleRasterizer();
-        List<PointF> myTriangle = triagnleRasterizer.GetRasterizedTriangle(new PointF(x1, y1), new PointF(x2, y2), new PointF(x3, y3));
+        List<PointF> myTriangle = TriangleRasterizer.GetRasterizedTriangle(new PointF(x1, y1), new PointF(x2, y2), new PointF(x3, y3));
 
         PrintResult(myTriangle);
     }
