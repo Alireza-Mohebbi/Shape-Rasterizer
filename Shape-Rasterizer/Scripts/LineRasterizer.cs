@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-// This method uses Bresenham's rasterization algorithm
+// This class uses Bresenham's rasterization algorithm
 public static class LineRasterizer
 {
     private static Point startPoint;
@@ -12,11 +12,10 @@ public static class LineRasterizer
     private static int lineHeight;
     private static float lineSlope;
     private static int nextPixel_Y_Decider;
-    private static List<Point> linePixels = new List<Point>();
+    private static List<Point> linePixels;
 
     public static List<Point> GetRasterizedLine(Point startPoint, Point endPoint)
     {
-        linePixels.Clear();
         InitializeVariables(startPoint, endPoint);
         if (IsLineValid())
         {
@@ -35,6 +34,7 @@ public static class LineRasterizer
         lineHeight = endPoint.Y - startPoint.Y;
         lineSlope = lineWidth == 0 ? 0 : (float)lineHeight / lineWidth;
         nextPixel_Y_Decider = 0;
+        linePixels = new List<Point>();
     }
 
     private static bool IsLineValid()
