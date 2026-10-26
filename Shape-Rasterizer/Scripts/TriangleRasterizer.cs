@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-// This method uses Pineda's rasterization algorithm
+// This class uses Pineda's rasterization algorithm
 public static class TriangleRasterizer
 {
     public static List<Point> GetRasterizedTriangle(PointF Point1, PointF Point2, PointF Point3)
